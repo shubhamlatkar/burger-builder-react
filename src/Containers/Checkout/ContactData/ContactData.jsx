@@ -126,66 +126,64 @@ class ContactData extends Component {
       formData[formEleId] = this.state.orderForm[formEleId].value;
     }
 
-    // let order = {
-    //   ingredients: this.props.ingredients,
-    //   price: this.props.totalPrice,
-    //   orderData: formData
-    // };
-
-    // console.log(order);
-
-    // axios
-    //   .post("/posts", order)
-    //   .then(res => {
-    //     console.log(res);
-    //     this.setState({ loading: false });
-    //     this.props.history.push("/");
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+    let order = {
+      ingredients: this.props.ingredients,
+      price: this.props.totalPrice,
+      orderData: formData
+    };
 
     axios
-      .get("/orderId/" + this.state.userId, {
-        headers: { "Access-Control-Allow-Origin": "*" }
-      })
+      .post("/posts", order)
       .then(res => {
-        console.log(res.data);
-        this.setState({ orderId: res.data }, () => {
-          let ingredients = this.props.ingredients;
-          ingredients.price = this.props.totalPrice;
-          ingredients.orderId = this.state.orderId;
-          axios
-            .put("/ingredients", ingredients, {
-              headers: { "Access-Control-Allow-Origin": "*" }
-            })
-            .then(res => {
-              console.log(res.data);
-              let address = formData;
-              address.userId = this.state.userId;
-              address.orderId = this.state.orserId;
-              axios
-                .put("/address", address, {
-                  headers: { "Access-Control-Allow-Origin": "*" }
-                })
-                .then(res => {
-                  console.log(res.data);
-                  this.setState({
-                    loading: !this.state.loading
-                  });
-                })
-                .catch(err => {
-                  console.log(err);
-                });
-            })
-            .catch(err => {
-              console.log(err);
-            });
-        });
+        console.log(res);
+        this.setState({ loading: false });
+        this.props.history.push("/");
       })
       .catch(err => {
         console.log(err);
       });
+
+    // axios
+    //   .get("/orderId/" + this.state.userId, {
+    //     headers: { "Access-Control-Allow-Origin": "*" }
+    //   })
+    //   .then(res => {
+    //     console.log(res.data);
+    //     this.setState({ orderId: res.data }, () => {
+    //       let ingredients = this.props.ingredients;
+    //       ingredients.price = this.props.totalPrice;
+    //       ingredients.orderId = this.state.orderId;
+    //       axios
+    //         .put("/ingredients", ingredients, {
+    //           headers: { "Access-Control-Allow-Origin": "*" }
+    //         })
+    //         .then(res => {
+    //           console.log(res.data);
+    //           let address = formData;
+    //           address.userId = this.state.userId;
+    //           address.orderId = this.state.orserId;
+    //           axios
+    //             .put("/address", address, {
+    //               headers: { "Access-Control-Allow-Origin": "*" }
+    //             })
+    //             .then(res => {
+    //               console.log(res.data);
+    //               this.setState({
+    //                 loading: !this.state.loading
+    //               });
+    //             })
+    //             .catch(err => {
+    //               console.log(err);
+    //             });
+    //         })
+    //         .catch(err => {
+    //           console.log(err);
+    //         });
+    //     });
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   inputChangedHandler = (event, formId) => {
@@ -201,7 +199,7 @@ class ContactData extends Component {
     );
 
     updatedFormElementValue.touched = true;
-    console.log(updatedFormElementValue);
+    // console.log("Element value",updatedFormElementValue);
 
     let formValid = true;
     for (let inputid in updatedForm) {

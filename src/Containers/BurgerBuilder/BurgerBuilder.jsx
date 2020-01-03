@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as actionTypes from "../../store/actions";
+import * as actionCreators from "../../store/actions/index";
 import axios from "../../axios-orders";
 import Modal from "../../Components/UI/Modal/Modal";
 import Burger from "../../Components/Burger/Burger";
@@ -88,7 +88,7 @@ class BurgerBuilder extends Component {
     };
     updatedIngredients[type] = updateCount;
     let priceAddition = INGREDIENTS_PRICES[type];
-    let oldPrice = this.state.totalPrice;
+    let oldPrice = this.props.totalPrice;
     let newPrice = oldPrice - priceAddition;
     this.setState({
       totalPrice: newPrice,
@@ -138,7 +138,7 @@ class BurgerBuilder extends Component {
           ingredientAdded={this.props.onIngredientAdded}
           substractIngredient={this.props.onIngredientRemoved}
           disabled={disabledInfo}
-          currentPrice={this.state.totalPrice.toFixed(2)}
+          currentPrice={this.props.totalPrice.toFixed(2)}
           purchaseable={this.updatePurchaseState(this.props.ingredients)}
           ordered={this.purchaseHandler}
         />
@@ -149,22 +149,17 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.ingredients
+    ingredients: state.ingredients,
+    totalPrice: state.totalPrice
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onIngredientAdded: ingredientType =>
-      dispatch({
-        type: actionTypes.ADD_INGREDIENTS,
-        ingredientType: ingredientType
-      }),
+      dispatch(actionCreators.addIngredient(ingredientType)),
     onIngredientRemoved: ingredientType =>
-      dispatch({
-        type: actionTypes.REMOVE_INGREDIENTS,
-        ingredientType: ingredientType
-      })
+      dispatch(actionCreators.removeIngredient(ingredientType))
   };
 };
 
