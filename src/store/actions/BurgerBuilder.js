@@ -12,3 +12,9 @@ export const removeIngredient = ingredientType => {
     ingredientType: ingredientType
   };
 };
+
+export const setIngredients = () => {
+  return {
+    type: actionTypes.SET_INGREDIENTS
+  };
+};

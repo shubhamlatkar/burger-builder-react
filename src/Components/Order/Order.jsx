@@ -1,10 +1,10 @@
 import React from "react";
 
-import styles from "../Order/Order.module.css";
+import "../Order/Order.css";
 
 const Order = props => {
   return (
-    <div className={styles.Order}>
+    <div className="Order">
       <p>Ingredients: salad:1</p>
       <p>
         Price : <strong>12$</strong>

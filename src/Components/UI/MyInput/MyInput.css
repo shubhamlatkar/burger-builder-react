@@ -19,6 +19,7 @@
   font: inherit;
   padding: 6px 10px;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .InputELement:focus {
@@ -29,4 +30,10 @@
 .Invalid {
   border: 1px solid red;
   background-color: #f09b92;
+}
+
+@media (max-width: 500px) {
+  .InputELement {
+    width: 200px;
+  }
 }

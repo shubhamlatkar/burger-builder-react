@@ -2,11 +2,11 @@ import React from "react";
 
 import Burger from "../../Burger/Burger";
 import MyButton from "../../UI/Button/Button";
-import styles from "../CheckoutSummary/CheckoutSummary.module.css";
+import "../CheckoutSummary/CheckoutSummary.css";
 
 const CheckoutSummary = props => {
   return (
-    <div className={styles.CheckoutSummary}>
+    <div className="CheckoutSummary">
       <h2>
         <strong>Hope it tastes well</strong>
       </h2>

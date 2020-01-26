@@ -1,7 +1,7 @@
 import React from "react";
 
 import BurgerIngredeints from "./BurgerIngredeints/BurgerIngredeints";
-import styles from "./Burger.module.css";
+import "./Burger.css";
 
 const Burger = props => {
   let transformedIngredients = Object.keys(props.ingredients)
@@ -19,7 +19,7 @@ const Burger = props => {
   }
 
   return (
-    <div className={styles.Burger}>
+    <div className="Burger">
       <BurgerIngredeints type={"bread-top"} />
       {transformedIngredients}
       <BurgerIngredeints type={"bread-bottom"} />

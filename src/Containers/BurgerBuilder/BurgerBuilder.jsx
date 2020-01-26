@@ -41,6 +41,10 @@ class BurgerBuilder extends Component {
     this.purchaseContinueHandler = this.purchaseContinueHandler.bind(this);
   }
 
+  componentDidMount() {
+    this.props.setIngredients();
+  }
+
   purchaseHandler() {
     this.setState({ purchasing: true });
   }
@@ -102,6 +106,7 @@ class BurgerBuilder extends Component {
   }
 
   purchaseContinueHandler() {
+    this.props.purchaseInit();
     this.props.history.push("/Checkout");
   }
 
@@ -159,7 +164,9 @@ const mapDispatchToProps = dispatch => {
     onIngredientAdded: ingredientType =>
       dispatch(actionCreators.addIngredient(ingredientType)),
     onIngredientRemoved: ingredientType =>
-      dispatch(actionCreators.removeIngredient(ingredientType))
+      dispatch(actionCreators.removeIngredient(ingredientType)),
+    purchaseInit: () => dispatch(actionCreators.purchaseInit()),
+    setIngredients: () => dispatch(actionCreators.setIngredients())
   };
 };
 

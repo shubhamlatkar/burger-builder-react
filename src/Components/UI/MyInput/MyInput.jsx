@@ -1,14 +1,14 @@
 import React from "react";
 
-import styles from "../MyInput/MyInput.module.css";
+import "../MyInput/MyInput.css";
 
 const MyInput = props => {
   let inputElement = null;
 
-  const inputClasses = [styles.InputELement];
+  const inputClasses = ["InputELement"];
 
   if (props.inValid && props.shouldValidate && props.touched) {
-    inputClasses.push(styles.Invalid);
+    inputClasses.push("Invalid");
   }
 
   switch (props.elementType) {
@@ -49,8 +49,8 @@ const MyInput = props => {
       );
   }
   return (
-    <div className={styles.MyInput}>
-      <label className={styles.MyLabel}>{props.label}</label>
+    <div className="MyInput">
+      <label className="MyLabel">{props.label}</label>
       {inputElement}
     </div>
   );

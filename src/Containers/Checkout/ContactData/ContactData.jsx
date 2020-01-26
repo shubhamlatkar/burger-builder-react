@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "../../../axios-orders";
 
 import MyButton from "../../../Components/UI/Button/Button";
-import styles from "../ContactData/ContactData.module.css";
+import "../ContactData/ContactData.css";
 import Spinner from "../../../Components/UI/Spinner/Spinner";
 import MyInput from "../../../Components/UI/MyInput/MyInput";
 import * as actions from "../../../store/actions/index";
@@ -246,7 +245,7 @@ class ContactData extends Component {
 
     if (this.props.loading) form = <Spinner />;
     return (
-      <div className={styles.ContactData}>
+      <div className="ContactData">
         <h4>Enter details</h4>
         {form}
       </div>

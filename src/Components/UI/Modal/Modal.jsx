@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Drop from "../../UI/Drop/Drop";
-import styles from "../Modal/Modal.module.css";
+import "../Modal/Modal.css";
 
 class Modal extends Component {
   render() {
@@ -14,7 +14,7 @@ class Modal extends Component {
             opacity: this.props.show ? "1" : "0",
             display: this.props.show ? "block" : "hidden"
           }}
-          className={styles.Modal}
+          className="Modal"
         >
           {this.props.children}
         </div>
