@@ -1,4 +1,4 @@
-  import React from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -9,10 +9,12 @@ import orderReducer from "./store/reducers/Order";
 import reducer from "./store/reducers/BurgerBuilderReducer";
 import App from "./App";
 import "./styles.css";
+import authReducer from "./store/reducers/Auth";
 
 const rootReducer = combineReducers({
   order: orderReducer,
-  burgerBuilderReducer: reducer
+  burgerBuilderReducer: reducer,
+  authReducer: authReducer
 });
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
