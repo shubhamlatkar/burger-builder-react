@@ -5,6 +5,7 @@ import MyInput from "../../Components/UI/MyInput/MyInput";
 import MyButton from "../../Components/UI/Button/Button";
 import * as actions from "../../store/actions/index";
 import "../Auth/Auth.css";
+import Spinner from "../../Components/UI/Spinner/Spinner";
 
 class Auth extends React.Component {
   state = {
@@ -127,13 +128,30 @@ class Auth extends React.Component {
         </MyButton>
       </form>
     );
+
+    form = this.props.loading ? <Spinner /> : form;
+
+    let errorMessage = this.props.error ? (
+      <p>{this.props.error.message}</p>
+    ) : null;
+
     return (
       <React.Fragment>
-        <div className="Auth">{form}</div>
+        <div className="Auth">
+          {errorMessage}
+          {form}
+        </div>
       </React.Fragment>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    loading: state.authReducer.loading,
+    error: state.authReducer.error
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -142,6 +160,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Auth);

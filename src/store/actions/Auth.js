@@ -22,6 +22,20 @@ export const authFail = error => {
   };
 };
 
+export const authLogout = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  };
+};
+
+export const checkAuthTimeout = expirationTime => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(authLogout());
+    }, expirationTime * 100);
+  };
+};
+
 export const auth = (email, password, isSignUp) => {
   return dispatch => {
     dispatch(authStart());
@@ -36,17 +50,14 @@ export const auth = (email, password, isSignUp) => {
         ? "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key="
         : "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=") +
       "AIzaSyA5HptAP6vtUuBQvQfeot8EwPuJVi6yG4Q";
-
-    console.log("url", url);
-
     axios
       .post(url, authData)
       .then(response => {
         dispatch(authSuccess(response.data.idToken, response.data.localId));
+        dispatch(checkAuthTimeout(response.data.expiresIn));
       })
       .catch(error => {
-        console.log("error", error);
-        dispatch(authFail(error));
+        dispatch(authFail(error.response.data.error));
       });
   };
 };
