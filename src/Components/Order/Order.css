@@ -6,3 +6,14 @@
   margin: 10px auto;
   box-sizing: border-box;
 }
+
+.Order .container {
+  width: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Order .container .col {
+  flex: 1;
+}

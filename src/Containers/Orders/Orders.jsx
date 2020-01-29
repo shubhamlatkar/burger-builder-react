@@ -1,15 +1,53 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import Order from "../../Components/Order/Order";
+import * as actions from "../../store/actions/index";
+import Spinner from "../../Components/UI/Spinner/Spinner";
 
 class Orders extends Component {
+  componentDidMount = () => {
+    this.props.onFetchOrders();
+  };
   render() {
+    let orders = !this.props.loading ? (
+      this.props.orders.map((order, index) => {
+        return (
+          <Order
+            key={order.id}
+            ingredients={order.ingredients}
+            price={order.price}
+            orderData={order.orderData}
+            id={index}
+          />
+        );
+      })
+    ) : (
+      <Spinner />
+    );
     return (
-      <div>
-        <Order />
+      <div className="orders-container">
+        {this.props.token ? orders : <h3>Please Log In To see your orders</h3>}
       </div>
     );
   }
 }
 
-export default Orders;
+const maptStateToProps = state => {
+  return {
+    orders: state.order.orders,
+    loading: state.order.loading,
+    token: state.authReducer.token
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchOrders: () => dispatch(actions.fetchOrders())
+  };
+};
+
+export default connect(
+  maptStateToProps,
+  mapDispatchToProps
+)(Orders);

@@ -5,6 +5,6 @@ export {
   initIngredients
 } from "./BurgerBuilder";
 
-export { purcahseBurgerStart, purchaseInit } from "./Order";
+export { purcahseBurgerStart, purchaseInit, fetchOrders } from "./Order";
 
 export { auth } from "./Auth";

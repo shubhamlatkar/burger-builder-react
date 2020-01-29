@@ -26,7 +26,9 @@ const orderReducer = (state = initState, action) => {
       };
     }
     case actionTypes.PURCHASE_BURGER_FAIL:
-      return {};
+      return {
+        ...initState
+      };
     case actionTypes.PURCHASE_BURGER_STARTED:
       return {
         ...state,

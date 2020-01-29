@@ -49,7 +49,7 @@ export const auth = (email, password, isSignUp) => {
       (isSignUp
         ? "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key="
         : "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=") +
-      "AIzaSyA5HptAP6vtUuBQvQfeot8EwPuJVi6yG4Q";
+     ;
     axios
       .post(url, authData)
       .then(response => {
