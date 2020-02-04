@@ -44,7 +44,10 @@ class BurgerBuilder extends Component {
   componentDidMount = () => {};
 
   purchaseHandler() {
-    this.setState({ purchasing: true });
+    console.log("this.props.isAuthenticated", this.props.isAuthenticated);
+    this.props.isAuthenticated
+      ? this.setState({ purchasing: true })
+      : this.props.history.push("/Auth");
   }
 
   updatePurchaseState(updatedIngredients) {
@@ -144,6 +147,7 @@ class BurgerBuilder extends Component {
           currentPrice={this.props.totalPrice.toFixed(2)}
           purchaseable={this.updatePurchaseState(this.props.ingredients)}
           ordered={this.purchaseHandler}
+          isAuthenticated={this.props.isAuthenticated}
         />
       </React.Fragment>
     );
@@ -153,7 +157,8 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
   return {
     ingredients: state.burgerBuilderReducer.ingredients,
-    totalPrice: state.burgerBuilderReducer.totalPrice
+    totalPrice: state.burgerBuilderReducer.totalPrice,
+    isAuthenticated: state.authReducer.token !== null
   };
 };
 

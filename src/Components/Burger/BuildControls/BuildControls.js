@@ -42,7 +42,7 @@ const BuildControls = props => {
         disabled={!props.purchaseable}
         className="OrderButton"
       >
-        Order Now
+        {props.isAuthenticated ? "Order Now" : "Please Sign In"}
       </button>
     </div>
   );

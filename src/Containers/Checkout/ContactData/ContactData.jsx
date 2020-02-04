@@ -131,8 +131,8 @@ class ContactData extends Component {
       price: this.props.totalPrice,
       orderData: formData
     };
-
-    this.props.purcahseBurgerStart(order);
+    console.log("this.props.token", this.props.token);
+    this.props.purcahseBurgerStart(order, this.props.token);
     //FOr local axios call
     // axios
     //   .post("/posts", order)
@@ -256,14 +256,15 @@ const mapStateToProps = state => {
   return {
     ingredients: state.burgerBuilderReducer.ingredients,
     totalPrice: state.burgerBuilderReducer.totalPrice,
-    loading: state.order.loading
+    loading: state.order.loading,
+    token: state.authReducer.token
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    purcahseBurgerStart: orderData =>
-      dispatch(actions.purcahseBurgerStart(orderData))
+    purcahseBurgerStart: (orderData, token) =>
+      dispatch(actions.purcahseBurgerStart(orderData, token))
   };
 };
 
