@@ -16,7 +16,7 @@ const initState = {
   },
   totalPrice: 4,
   error: null,
-  building: null
+  building: false
 };
 
 const reducer = (state = initState, action) => {
